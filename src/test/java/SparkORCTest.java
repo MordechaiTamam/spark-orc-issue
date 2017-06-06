@@ -52,7 +52,11 @@ public class SparkORCTest {
 
         session.read().json(json1Path).write().mode("overwrite").orc(orcInput1);
         session.read().json(json2Path).write().mode("overwrite").orc(orcInput2);
-        Dataset<Row> ds = session.read().orc(orcInput1,orcInput2);
+        Dataset<Row> ds = session.read().orc(orcInput1);
+        ds.show();
+        ds = session.read().orc(orcInput2);
+        ds.show();
+        ds = session.read().orc(orcInput1,orcInput2);
         ds.printSchema();
         ds.show();
     }
